@@ -15,7 +15,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     var activeCells = [IndexPath]()
     var flashSequence = [IndexPath]()
-    var levelCounter = 0
+    var levelCounter = 1
+    var flashSpeed = 0.25
     
     let levels = [
     [6,7,8],
@@ -73,6 +74,73 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         activeCells = (activeCells as NSArray).shuffled() as! [IndexPath]
         flashSequence = Array(activeCells.dropFirst())
+        
+        DispatchQueue.main.asyncAfter(deadline:.now() + 1){
+            self.flashLight()
+        }
+    }
+    
+    func flashLight() {
+        
+        if let indexPath = flashSequence.popLast() {
+            
+            guard let cell = collectionView.cellForItem(at: indexPath) else {return}
+            
+            guard let imageView = cell.contentView.subviews.first as? UIImageView else { return }
+            
+            imageView.image = UIImage(named: "greenLight")
+            
+            cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            
+            UIView.animate(withDuration: flashSpeed, animations: {
+                cell.transform = .identity
+            }) { _ in
+                imageView.image = UIImage(named: "redLight")
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + self.flashSpeed){
+                    
+                    self.flashLight()
+                    
+                }
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.view.isUserInteractionEnabled = true
+                self.setNeedsFocusUpdate()
+            }
+        }
+    }
+    
+    func gameOver() {
+        let alert = UIAlertController(title: "Game Over!", message: "You made it to level \(levelCounter)", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Start Again?", style: .default) {
+            _ in
+            self.levelCounter = 1
+            self.createLevel()
+        }
+        alert.addAction(action)
+        present(alert,animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        view.isUserInteractionEnabled = false
+        resultImage.alpha = 1
+        
+        if indexPath == activeCells[0] {
+            resultImage.image = UIImage(named: "correct")
+            levelCounter += 1
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1 ){
+                self.createLevel()
+            }
+        } else {
+            resultImage.image = UIImage(named: "correct")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1 ){
+                self.gameOver()
+            }
+        }
+        
     }
 
 
