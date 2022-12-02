@@ -135,7 +135,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 self.createLevel()
             }
         } else {
-            resultImage.image = UIImage(named: "correct")
+            resultImage.image = UIImage(named: "wrong")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1 ){
                 self.gameOver()
             }

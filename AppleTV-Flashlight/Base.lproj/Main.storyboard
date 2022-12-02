@@ -20,12 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="correct" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-pP-JF6">
-                                <rect key="frame" x="547" y="426" width="826" height="228"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="rHv-pP-JF6" secondAttribute="height" multiplier="413:114" id="miG-CV-doc"/>
-                                </constraints>
-                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ESc-rQ-bAb">
                                 <rect key="frame" x="24" y="0.0" width="1920" height="1080"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -59,6 +53,12 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="yh3-k2-S6G"/>
                                 </connections>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="correct" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-pP-JF6">
+                                <rect key="frame" x="547" y="426" width="826" height="228"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rHv-pP-JF6" secondAttribute="height" multiplier="413:114" id="miG-CV-doc"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wu6-TO-1qx"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
